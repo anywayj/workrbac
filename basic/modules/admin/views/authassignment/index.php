@@ -1,0 +1,39 @@
+<?php
+
+use yii\helpers\Html;
+use yii\grid\GridView;
+
+/* @var $this yii\web\View */
+/* @var $searchModel app\models\AuthAssignmentSeach */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = 'Правила доступа';
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="auth-assignment-index">
+
+    <h1><?= Html::encode($this->title) ?></h1>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <p>
+        <?= Html::a('Добавить роль', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'item_name',
+            'user_id',
+            [
+                'header' => 'username',
+                'attribute' => 'author.username',
+            ],
+            'created_at',
+
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
+</div>
